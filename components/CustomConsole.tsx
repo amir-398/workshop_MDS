@@ -5,7 +5,6 @@ export const CONSOLES = [
   { id: '2', idCss: 'gameboy-advance', titleClass: 'light-title-font', subTitleClass: 'light-subTitle-font', subTitle: "La plus polyvalente", title: "gameboy advance", filePath: "/images/gameboy-advance.png", alt:"image", link:"/a"  },
   { id: '3', idCss: 'advance-sp', titleClass: 'light-title-font', subTitleClass: 'light-subTitle-font', subTitle: "La plus pratique", title: "ADVANCE SP", filePath: "/images/advance-sp.png", alt:"image", link:"/a"  },
   { id: '4', idCss: 'gameboy-dmg', titleClass: 'dark-title-font', subTitleClass: 'dark-subTitle-font', subTitle: "L'originale", title: "gameboy dmg", filePath: "/images/gameboy-dmg.png", alt:"image", link:"/a"  },
-  { id: '5', idCss: 'gameboy-dmg', titleClass: 'dark-title-font', subTitleClass: 'dark-subTitle-font', subTitle: "L'originale", title: "gameboy dmg", filePath: "/images/gameboy-dmg.png", alt:"image", link:"/a"  },
 ]
 
 const CustomConsole = () => {
