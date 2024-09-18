@@ -2,26 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Importation de la police Bebas Neue avec différents formats */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/BebasNeue-Regular.woff2') format('woff2'),
+       url('/fonts/BebasNeue-Regular.woff') format('woff'),
+       url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
+}
+
+
+/* Définition des couleurs */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
 
+/* Appliquer Bebas Neue à tout le texte */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
 }
 
+/* Utilitaire text-balance */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Soulignement animé */
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff; /* Bleu équivalent au hover */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+a {
+  position: relative;
 }
