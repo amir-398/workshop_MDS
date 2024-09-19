@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        customizedButton: '#26a0f3',
+        gameboyColor: 'blue',
       },
     },
   },
