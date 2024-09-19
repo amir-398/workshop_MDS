@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from '../components/Header';  
 import Footer from '../components/Footer';  
+import BannerLivraison from '../components/BannerLivraison'; 
+import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "Retro Metroid Store",
@@ -15,13 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen antialiased">
+      <body className="flex flex-col min-h-screen bg-white antialiased">
         <Header />
-        {/* Contenu principal qui grandit pour occuper l'espace restant */}
+        <BannerLivraison />
         <main className="flex-grow">
           {children}
         </main>
-        {/* Footer */}
+        <BackToTop />
         <Footer />
       </body>
     </html>
