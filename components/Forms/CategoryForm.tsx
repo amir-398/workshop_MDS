@@ -30,20 +30,13 @@ const validationSchema = yup.object().shape({
               .min(2, "Le nom de votre console doit contenir au minimum 2 lettres")
               .max(20, "Le nom de votre console doit contenir maximum 20 lettres"),
     price: yup.number().required("Vous devez renseigner le prix de la console"),
-    discount_price : yup.number().required(),
+    discount_price : yup.number().required("Vous devez renseigner le prix de la console"),
     description: yup.string().required("Vous devez ajouter une description"),
     images : yup.array().required("Merci de renseigner une ou plusieurs images")
   });
 
 export default function CategoryForm({initialData, onSubmit} : CategoryFormProps) {
     const { register, handleSubmit, formState: { errors} } = useForm<CategoryFormInput>({
-        defaultValues: {
-            name: initialData?.name || '',
-            price: initialData?.price || 0,
-            discount_price: initialData?.discount_price || 0,
-            description: initialData?.description || '',
-            images: initialData?.images || [],
-          },
           resolver :yupResolver(validationSchema)
     })
 
@@ -116,12 +109,6 @@ export default function CategoryForm({initialData, onSubmit} : CategoryFormProps
             <label htmlFor="description" className="block text-sm font-medium text-gray-900">
                 Description
             </label>
-            {/* <input 
-                id='description'
-                type="text" 
-                {...register("description", { required: "La description de la console est requise" })}
-                className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-            /> */}
             <textarea 
                 id="description" 
                 rows="4" 

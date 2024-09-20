@@ -1,5 +1,6 @@
 "use client"
-import React from 'react';
+import React from 'react'
+import Image from "next/image"
 
 interface ImageUploaderProps {
     images: File[]
@@ -44,11 +45,19 @@ export default function ImageUploader({ images, setImages }: ImageUploaderProps)
       <div className="mt-4 grid grid-cols-3 gap-4">
         {images.map((image, index) => (
           // Affiche chaque image sous forme de vignette
-          <img 
-            key={index} 
-            src={URL.createObjectURL(image)} 
-            alt={`Image ${index}`} 
-            className="w-full h-auto" 
+          // <img 
+          //   key={index} 
+          //   src={URL.createObjectURL(image)} 
+          //   alt={`Image ${index}`} 
+          //   className="w-full h-auto" 
+          // />
+          <Image
+              key={index}
+              src={URL.createObjectURL(image)}  // Conversion en URL pour l'aperçu
+              alt={`Image ${index}`}
+              width={470}
+              height={366}
+              className="rounded-lg w-full h-auto"  // Optionnel : styles de l'image
           />
         ))}
       </div>

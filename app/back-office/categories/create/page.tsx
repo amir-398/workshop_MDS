@@ -1,8 +1,8 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import CategoryForm from "../../../components/Forms/CategoryForm"
-import axiosInstance from '../../../services/axiosInstances'
+import CategoryForm from "../../../../components/Forms/CategoryForm"
+import axiosInstance from '../../../../services/axiosInstances'
 
 export default function CreateCategory() {
     const router = useRouter()
@@ -14,15 +14,23 @@ export default function CreateCategory() {
         try {
             const response = await axiosInstance.post('/categories/add', formData)
 
-            if (response.status === 201) {
-                setConfirmationMessage('La nouvelle console a été ajouté avec succès !')
+            // if (response.status === 201) {
+            //     setConfirmationMessage('La nouvelle console a été ajouté avec succès !')
+                
+            //     setTimeout(() => {
+            //         router.push('/back-office/categories')
+            //     }, 2000)
+            // } else {
+            //     console.error('Erreur lors de la création de la catégorie')
+            // }
 
-                setTimeout(() => {
-                    router.push('/back-office/categories')
-                }, 2000)
+            if (response?.status === 201) {
+                setConfirmationMessage('La nouvelle console a été ajoutée avec succès !');
+                router.push('/back-office/categories');
             } else {
-                console.error('Erreur lors de la création de la catégorie')
+                console.error('Erreur lors de la création de la catégorie', response);
             }
+            
         } catch (error) {
             console.error('Erreur réseau ou autre', error)
         }

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { fetchCategories, deleteCategory } from "../../../services/categoryService"
-import axiosInstance from "../../../services/axiosInstances"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 interface Category {
     id: number
@@ -24,6 +25,7 @@ export default function CategoriesPage() {
 
     const BASE_URL = 'http://localhost:3001'
 
+    const router = useRouter()
 
     // on récupère les catégories dès que le composant est monté
     useEffect(() => {
@@ -61,6 +63,12 @@ export default function CategoriesPage() {
         }
     }
 
+    // Fonction pour rediriger vers la page de création
+    const handleAddNewConsole = () => {
+        console.log("Redirection en cours vers /back-office/categories/create");
+        router.push("/back-office/categories/create")
+    }
+
     if (loading) {
         return <p>Chargement des catégories...</p>
     }
@@ -76,6 +84,15 @@ export default function CategoriesPage() {
                 <h1 className="text-4xl md:text-7xl font-bold text-white">Catégories de Consoles</h1>
             </div>
             
+            {/* Bouton "Ajouter une nouvelle console" */}
+            <div className="mb-8 flex justify-start sm:pl-4">
+                <button
+                    onClick={handleAddNewConsole}
+                    className="bg-black hover:bg-[#2a74ed] transition duration-300 text-xl w-4/5 mx-auto sm:w-2/5 sm:text-2xl text-white px-4 py-2 rounded-md"
+                >
+                    Ajouter une nouvelle console
+                </button>
+            </div>
     
             {/* Grille d'affichage des catégories récupérées */}
             <div className="mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -92,9 +109,11 @@ export default function CategoriesPage() {
                         return (
                             // Chaque image est affichée sous forme de vignette
                             <div key={index} className="relative w-full h-40">
-                                <img
+                                <Image
                                     src={`${BASE_URL}${image.filePath}`}
                                     alt={`Image ${index}`}
+                                    layout="fill"
+                                    quality={75}
                                     className="w-full h-full object-cover rounded-lg"
                                 />
                             </div>
