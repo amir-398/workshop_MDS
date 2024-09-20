@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import BannerLivraison from "../components/BannerLivraison";
 import BackToTop from "@/components/BackToTop";
 
@@ -21,7 +20,9 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen bg-white antialiased">
         <Header />
         <BannerLivraison />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow">
+          {children}
+        </main>
         <BackToTop />
         <Footer />
       </body>
