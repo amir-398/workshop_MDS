@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from '../components/Header';  
-import Footer from '../components/Footer';  
-import BannerLivraison from '../components/BannerLivraison'; 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import BannerLivraison from "../components/BannerLivraison";
 import BackToTop from "@/components/BackToTop";
-
-
 
 export const metadata: Metadata = {
   title: "Retro Metroid Store",

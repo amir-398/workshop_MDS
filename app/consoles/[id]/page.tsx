@@ -1,12 +1,12 @@
 "use client"; // Assurez-vous que ce composant est client-side
 
-import { useParams } from 'next/navigation';
-import Options from './options';
-import BannerConsoles from '@/components/BannerConsoles';
+import { useParams } from "next/navigation";
+import Options from "../../../components/options";
+import BannerConsoles from "@/components/BannerConsoles";
 
-const validConsoles = ['gameboy-dmg'] as const;
+const validConsoles = ["gameboy-dmg"] as const;
 
-type ConsoleId = typeof validConsoles[number];
+type ConsoleId = (typeof validConsoles)[number];
 
 const ConsolePage = () => {
   const { id } = useParams();
@@ -23,12 +23,11 @@ const ConsolePage = () => {
     <div>
       <BannerConsoles consoleName={consoleId} />
 
-      <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-      <h1 className="text-3xl mt-10">Choisissez vos options pour personnaliser votre {consoleId}</h1>
-
-        <div className="flex w-full max-w-6xl">
-          <Options consoleId={consoleId as ConsoleId} />
-        </div>
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-3xl mt-10 text-center">
+          Choisissez vos options pour personnaliser votre {consoleId}
+        </h1>
+        <Options consoleId={consoleId as ConsoleId} />
       </div>
     </div>
   );
