@@ -20,7 +20,7 @@ const Footer = () => {
               </Link>
               <Link href="https://www.tiktok.com/@retrometroid" className="w-8 h-8 flex items-center justify-center ">
                 <Image
-                  src="/icons/tiktok.png"
+                  src="/icons/tiktok.jpg"
                   alt="TikTok"
                   width={29}
                   height={29}
