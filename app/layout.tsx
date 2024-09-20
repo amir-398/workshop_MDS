@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from '../components/Header';  
 import Footer from '../components/Footer';  
+import CreateAccessoryPage from "../app/back-office/accessories/create/page"
 
 export const metadata: Metadata = {
   title: "Retro Metroid Store",
@@ -18,7 +19,8 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen antialiased">
         <Header />
         <main className="flex-grow">
-          {children}
+          {/* {children} */}
+          <CreateAccessoryPage />
         </main>
         <Footer />
       </body>
