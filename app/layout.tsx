@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import BannerLivraison from "../components/BannerLivraison";
 import BackToTop from "@/components/BackToTop";
 
+
 export const metadata: Metadata = {
   title: "Retro Metroid Store",
   description: "E-commerce de consoles rétro customisées",
