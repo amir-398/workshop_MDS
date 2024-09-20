@@ -17,6 +17,7 @@ const Header = () => {
               alt="Retrometroid Logo"
               width={160}
               height={100}
+              priority 
             />
           </Link>
         </div>
@@ -56,6 +57,7 @@ const Header = () => {
                 alt="Panier"
                 width={32}
                 height={32}
+                className="object-cover"
               />
             </div>
           </Link>
@@ -107,8 +109,8 @@ const Header = () => {
                 <Image
                   src="/images/profil.png"
                   alt="Profil"
-                  width={28}
-                  height={28}
+                  width={26}
+                  height={26}
                   className="object-cover"
                 />
               </div>

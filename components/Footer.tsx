@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -8,9 +8,14 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           {/* Droits réservés et icônes de réseaux sociaux pour les petits écrans */}
           <div className="text-left mb-4 md:mb-0">
-            <p className="text-base">Tous droits réservés – Retrometroid 2024</p>
+            <p className="text-base">
+              Tous droits réservés – Retrometroid 2024
+            </p>
             <div className="mt-4 flex space-x-4">
-              <Link href="https://www.instagram.com" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-pink-500">
+              <Link
+                href="https://www.instagram.com/retrometroid8/"
+                className="w-8 h-8 flex items-center justify-center"
+              >
                 <Image
                   src="/icons/instagram.png"
                   alt="Instagram"
@@ -18,15 +23,21 @@ const Footer = () => {
                   height={29}
                 />
               </Link>
-              <Link href="https://www.tiktok.com" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-pink-500">
+              <Link
+                href="https://www.tiktok.com/@retrometroid"
+                className="w-8 h-8 flex items-center justify-center "
+              >
                 <Image
-                  src="/icons/tiktok.jpg"
+                  src="/icons/tiktok.png"
                   alt="TikTok"
                   width={29}
                   height={29}
                 />
               </Link>
-              <Link href="https://www.facebook.com" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-pink-500">
+              <Link
+                href="https:/"
+                className="w-8 h-8 flex items-center justify-center "
+              >
                 <Image
                   src="/icons/facebook.png"
                   alt="Facebook"
@@ -34,12 +45,15 @@ const Footer = () => {
                   height={29}
                 />
               </Link>
-              <Link href="mailto:example@example.com" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-pink-500">
+              <Link
+                href="mailto:example@example.com"
+                className="w-8 h-8 flex items-center justify-center "
+              >
                 <Image
                   src="/icons/email.png"
                   alt="Email"
-                  width={36}
-                  height={36}
+                  width={29}
+                  height={29}
                 />
               </Link>
             </div>

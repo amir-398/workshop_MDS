@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from '../components/Header';  
-import Footer from '../components/Footer';  
-import CreateAccessoryPage from "../app/back-office/accessories/create/page"
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import BannerLivraison from "../components/BannerLivraison";
+import BackToTop from "@/components/BackToTop";
+
 
 export const metadata: Metadata = {
   title: "Retro Metroid Store",
@@ -16,12 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen antialiased">
+      <body className="flex flex-col min-h-screen bg-white antialiased">
         <Header />
+        <BannerLivraison />
         <main className="flex-grow">
-          {/* {children} */}
-          <CreateAccessoryPage />
+          {children}
         </main>
+        <BackToTop />
         <Footer />
       </body>
     </html>
