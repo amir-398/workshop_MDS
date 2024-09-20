@@ -1,17 +1,18 @@
-
-
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import arrowUp from "/public/icons/arrowup.png";
 import arrowDown from "/public/icons/arrowdown.png";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface OptionsProps {
   consoleId: "gameboy-dmg";
 }
 
 const Options = ({ consoleId }: OptionsProps) => {
+  const router = useRouter();
   const optionsByConsole = {
     "gameboy-dmg": {
       baseOptions: [
@@ -30,7 +31,11 @@ const Options = ({ consoleId }: OptionsProps) => {
         { name: "DMG", code: "DMG", cssColor: "#c8c8c8" },
         { name: "Blue", code: "Blue", cssColor: "#1e54db" },
         { name: "Clear Violet", code: "ClearViolet", cssColor: "#a878d1" },
-        { name: "Clear Blue Ocean", code: "ClearBlueOcean", cssColor: "#28dbc1" },
+        {
+          name: "Clear Blue Ocean",
+          code: "ClearBlueOcean",
+          cssColor: "#28dbc1",
+        },
       ],
       ipsScreen: ["Black", "DMG"],
       rearShell: [
@@ -66,20 +71,34 @@ const Options = ({ consoleId }: OptionsProps) => {
   const options = optionsByConsole[consoleId];
 
   const [customizationDetails, setCustomizationDetails] = useState({
-    id: [] as string[],  // Assurez-vous que `id` est bien un tableau de chaînes de caractères
+    id: [] as string[], // Assurez-vous que `id` est bien un tableau de chaînes de caractères
+    name: consoleId,
     Baseconsole: "",
     Coque: "",
-    CoqueArriere: "",
+    Coque_arriere: "",
     ecranIPS: "",
     Boutons: "",
     Pads: "",
     accessoires: [] as string[], // Initialisez `accessoires` avec un tableau de chaînes de caractères
     prixFinal: 129,
   });
-
-  const [selectedBaseOption, setSelectedBaseOption] = useState<string | null>(null);
+  const onSubmit = async () => {
+    const response = await axios.post(
+      "http://localhost:3001/products",
+      customizationDetails
+    );
+    const productID = response.data.id;
+    router.push(
+      `https://api-retrometroid.devprod.fr/panier/?add-to-cart=${productID}`
+    );
+  };
+  const [selectedBaseOption, setSelectedBaseOption] = useState<string | null>(
+    null
+  );
   const [selectedColor, setSelectedColor] = useState<string>("DMG");
-  const [selectedRearShell, setSelectedRearShell] = useState<string | null>(null);
+  const [selectedRearShell, setSelectedRearShell] = useState<string | null>(
+    null
+  );
   const [selectedIpsScreen, setSelectedIpsScreen] = useState<string>("DMG");
   const [selectedButton, setSelectedButton] = useState<string>("DMG-02_");
   const [selectedPad, setSelectedPad] = useState<string>("Black");
@@ -114,16 +133,16 @@ const Options = ({ consoleId }: OptionsProps) => {
       prix += 40;
     }
     if (selectedRearShell) {
-      prix += 11.90;
+      prix += 11.9;
     }
     if (selectedBattery === "Batterie + Câble USB-C (+40€)") {
       prix += 40;
     }
     if (selectedAccessory.includes(1)) {
-      prix += 4.90;
+      prix += 4.9;
     }
     if (selectedAccessory.includes(2)) {
-      prix += 6.90;
+      prix += 6.9;
     }
 
     // Mise à jour du prix final et accessoires
@@ -136,7 +155,12 @@ const Options = ({ consoleId }: OptionsProps) => {
       accessoires: selectedAccessoryNames, // Mise à jour des accessoires
       prixFinal: prix,
     }));
-  }, [selectedBaseOption, selectedRearShell, selectedBattery, selectedAccessory]);
+  }, [
+    selectedBaseOption,
+    selectedRearShell,
+    selectedBattery,
+    selectedAccessory,
+  ]);
 
   const handleOptionChange = (optionType: string, value: string) => {
     setCustomizationDetails((prevDetails) => ({
@@ -154,7 +178,9 @@ const Options = ({ consoleId }: OptionsProps) => {
   // Toggle des étapes
   const toggleStep = (step: number) => {
     setActiveSteps((prevSteps) =>
-      prevSteps.includes(step) ? prevSteps.filter((s) => s !== step) : [...prevSteps, step]
+      prevSteps.includes(step)
+        ? prevSteps.filter((s) => s !== step)
+        : [...prevSteps, step]
     );
   };
 
@@ -163,7 +189,10 @@ const Options = ({ consoleId }: OptionsProps) => {
       {/* Image de la console à gauche */}
       <div className="flex-1 p-4 relative max-w-full lg:max-w-[50%] mx-auto">
         <Image
-          src={`/images/Gameboy-DMG/${generateImageName("shell", selectedColor)}`}
+          src={`/images/Gameboy-DMG/${generateImageName(
+            "shell",
+            selectedColor
+          )}`}
           alt="Coque avant"
           width={800}
           height={600}
@@ -172,7 +201,10 @@ const Options = ({ consoleId }: OptionsProps) => {
 
         {selectedRearShell && (
           <Image
-            src={`/images/Gameboy-DMG/${generateImageName("rearShell", selectedRearShell)}`}
+            src={`/images/Gameboy-DMG/${generateImageName(
+              "rearShell",
+              selectedRearShell
+            )}`}
             alt="Coque arrière"
             width={800}
             height={600}
@@ -182,7 +214,10 @@ const Options = ({ consoleId }: OptionsProps) => {
 
         {selectedIpsScreen && (
           <Image
-            src={`/images/Gameboy-DMG/${generateImageName("ipsScreen", selectedIpsScreen)}`}
+            src={`/images/Gameboy-DMG/${generateImageName(
+              "ipsScreen",
+              selectedIpsScreen
+            )}`}
             alt="Écran IPS"
             width={800}
             height={600}
@@ -192,7 +227,10 @@ const Options = ({ consoleId }: OptionsProps) => {
 
         {selectedButton && (
           <Image
-            src={`/images/Gameboy-DMG/${generateImageName("buttons", selectedButton)}`}
+            src={`/images/Gameboy-DMG/${generateImageName(
+              "buttons",
+              selectedButton
+            )}`}
             alt="Boutons"
             width={800}
             height={600}
@@ -212,7 +250,10 @@ const Options = ({ consoleId }: OptionsProps) => {
 
         {selectedBattery && (
           <Image
-            src={`/images/Gameboy-DMG/${generateImageName("battery", selectedBattery)}`}
+            src={`/images/Gameboy-DMG/${generateImageName(
+              "battery",
+              selectedBattery
+            )}`}
             alt="Batterie USB-C"
             width={800}
             height={600}
@@ -222,12 +263,14 @@ const Options = ({ consoleId }: OptionsProps) => {
       </div>
 
       {/* Accordion pour les étapes */}
-      <div className="flex-1 h-[80vh] overflow-y-auto bg-white p-6 lg:mx-60 my-8 w-full lg:w-[35%] rounded-lg shadow-2xl top-0 left-10">
+      <div className="flex-1 h-[80vh] overflow-y-auto bg-white p-6 lg:mx-60 my-8 w-full md:w-[60vw] rounded-lg shadow-2xl top-0 left-10">
         <h2 className="text-xl mb-4 text-center">Configuration</h2>
 
         {/* Affichage du prix final */}
         <div className="text-center mb-4">
-          <span className="text-2xl font-bold">Prix final : {customizationDetails.prixFinal}€</span>
+          <span className="text-2xl font-bold">
+            Prix final : {customizationDetails.prixFinal}€
+          </span>
         </div>
 
         {/* Étape 1 : Base Console */}
@@ -253,7 +296,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <li key={index}>
                     <button
                       className={`py-2 px-4 mt-2 w-full rounded-lg ${
-                        selectedBaseOption === option ? "bg-blue-500 text-white" : "bg-gray-300"
+                        selectedBaseOption === option
+                          ? "bg-blue-500 text-white"
+                          : "bg-gray-300"
                       }`}
                       onClick={() => {
                         setSelectedBaseOption(option);
@@ -269,8 +314,8 @@ const Options = ({ consoleId }: OptionsProps) => {
           )}
         </div>
 
-         {/* Étape 2 : Coque */}
-         <div className="mb-4">
+        {/* Étape 2 : Coque */}
+        <div className="mb-4">
           <div
             className="p-4 bg-cyan-50 cursor-pointer rounded-lg flex justify-between items-center"
             onClick={() => toggleStep(2)}
@@ -292,7 +337,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <button
                     key={index}
                     className={`w-12 h-12 rounded-full border-2 ${
-                      selectedColor === color.code ? "border-blue-500" : "border-gray-300"
+                      selectedColor === color.code
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     style={{ backgroundColor: color.cssColor }}
                     onClick={() => {
@@ -329,7 +376,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <button
                     key={index}
                     className={`w-12 h-12 rounded-full border-2 ${
-                      selectedRearShell === shell.code ? "border-blue-500" : "border-gray-300"
+                      selectedRearShell === shell.code
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     style={{ backgroundColor: shell.cssColor }}
                     onClick={() => {
@@ -366,7 +415,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <button
                     key={index}
                     className={`w-12 h-12 rounded-full border-2 ${
-                      selectedIpsScreen === screen ? "border-blue-500" : "border-gray-300"
+                      selectedIpsScreen === screen
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     onClick={() => {
                       setSelectedIpsScreen(screen);
@@ -404,7 +455,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <button
                     key={index}
                     className={`w-12 h-12 rounded-full border-2 ${
-                      selectedButton === button.code ? "border-blue-500" : "border-gray-300"
+                      selectedButton === button.code
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     style={{ backgroundColor: button.cssColor }}
                     onClick={() => {
@@ -440,7 +493,9 @@ const Options = ({ consoleId }: OptionsProps) => {
                   <button
                     key={index}
                     className={`w-12 h-12 rounded-full border-2 ${
-                      selectedPad === pad ? "border-blue-500" : "border-gray-300"
+                      selectedPad === pad
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     style={{ backgroundColor: pad.toLowerCase() }}
                     onClick={() => {
@@ -476,8 +531,10 @@ const Options = ({ consoleId }: OptionsProps) => {
                 {options.battery.map((battery, index) => (
                   <button
                     key={index}
-                    className={`w-12 h-12 rounded-full border-2 ${
-                      selectedBattery === battery ? "border-blue-500" : "border-gray-300"
+                    className={`h-12 px-2 rounded-full border-2 ${
+                      selectedBattery === battery
+                        ? "border-blue-500"
+                        : "border-gray-300"
                     }`}
                     onClick={() => {
                       setSelectedBattery(battery);
@@ -511,17 +568,19 @@ const Options = ({ consoleId }: OptionsProps) => {
           {activeSteps.includes(8) && (
             <div className="p-4 bg-white rounded-lg mt-2">
               <div className="flex flex-wrap gap-4">
-              {options.accessories.map((accessory, index) => (
-  <button
-    key={index}
-    className={`w-12 h-12 rounded-full border-2 ${
-      selectedAccessory.includes(accessory.id) ? "border-blue-500" : "border-gray-300"
-    }`}
-    onClick={() => handleAccessoryChange(accessory.id)}
-  >
-    {accessory.name}
-  </button>
-))}
+                {options.accessories.map((accessory, index) => (
+                  <button
+                    key={index}
+                    className={`h-12 px-2 rounded-full border-2 ${
+                      selectedAccessory.includes(accessory.id)
+                        ? "border-blue-500"
+                        : "border-gray-300"
+                    }`}
+                    onClick={() => handleAccessoryChange(accessory.id)}
+                  >
+                    {accessory.name}
+                  </button>
+                ))}
               </div>
             </div>
           )}
@@ -530,12 +589,11 @@ const Options = ({ consoleId }: OptionsProps) => {
         {/* Bouton Ajouter au panier */}
         <button
           className="mt-4 bg-blue-500 text-white py-2 px-4 rounded w-full bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500"
-          onClick={() => {
-            console.log("Détails de personnalisation:", customizationDetails);
-          }}
+          onClick={onSubmit}
         >
           Ajouter au panier
-        </button>{/* Étape 2 : Coque */}
+        </button>
+        {/* Étape 2 : Coque */}
         {/* Ajoutez les autres étapes ici */}
       </div>
     </div>
@@ -543,28 +601,3 @@ const Options = ({ consoleId }: OptionsProps) => {
 };
 
 export default Options;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
