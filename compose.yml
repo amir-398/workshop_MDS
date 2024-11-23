@@ -1,0 +1,11 @@
+services:
+  metroide-front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: workshop-metroide-front
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
