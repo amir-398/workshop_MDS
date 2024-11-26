@@ -16,16 +16,6 @@ export default function CreateCategory() {
     try {
       const response = await axiosInstance.post("/categories/add", formData);
 
-      // if (response.status === 201) {
-      //     setConfirmationMessage('La nouvelle console a été ajouté avec succès !')
-
-      //     setTimeout(() => {
-      //         router.push('/back-office/categories')
-      //     }, 2000)
-      // } else {
-      //     console.error('Erreur lors de la création de la catégorie')
-      // }
-
       if (response?.status === 201) {
         setConfirmationMessage(
           "La nouvelle console a été ajoutée avec succès !"

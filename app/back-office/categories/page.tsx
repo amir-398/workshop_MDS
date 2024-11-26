@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchCategories, deleteCategory } from "../../../services/categoryService"
+import { fetchCategories, deleteCategory, updateCategory } from "../../../services/categoryService"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 
@@ -48,6 +48,11 @@ export default function CategoriesPage() {
         getCategories() 
     }, [])
 
+    const handleEditCategory = (categoryId: number) => {
+        console.log(`Redirection vers /back-office/categories/edit/${categoryId}`)
+        router.push(`/back-office/categories/edit/${categoryId}`)
+    }
+
     const handleDeleteCategory = async (categoryId: number) => {
         if (confirm("Êtes-vous sûr de vouloir supprimer cette catégorie ?")) {
             try {
@@ -83,6 +88,7 @@ export default function CategoriesPage() {
             <div className="bg-header pt-20 pb-16 pl-8 mb-12">
                 <h1 className="text-4xl md:text-7xl font-bold text-white">Catégories de Consoles</h1>
             </div>
+            <button onClick={updateCategory}>tedt</button>
             
             {/* Bouton "Ajouter une nouvelle console" */}
             <div className="mb-8 flex justify-start sm:pl-4">
@@ -131,6 +137,14 @@ export default function CategoriesPage() {
 
                     {/* Description de la catégorie */}
                     <p className="mt-2 sm:text-xl">Description: {category.description}</p>
+                    
+                    {/* Bouton de modification */}
+                    <button
+                        onClick={() => handleEditCategory(category.id)}
+                        className="w-full mt-4 bg-blue-500 hover:bg-blue-700 transition duration-300 text-white px-4 py-2 rounded"
+                    >
+                        Modifier
+                    </button>
 
                      {/* Bouton de suppression */}
                      <button
